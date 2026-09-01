@@ -1,0 +1,5 @@
+# build artifacts
+**/build/
+
+# exercise binaries (add more as new exercises are built)
+ex00/polymorphism
