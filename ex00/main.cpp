@@ -6,7 +6,7 @@
 /*   By: kong <kong@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 16:05:26 by kong              #+#    #+#             */
-/*   Updated: 2026/08/31 21:18:40 by kong             ###   ########.fr       */
+/*   Updated: 2026/09/01 11:55:19 by kong             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,3 +96,27 @@ int main()
 
 	return 0;
 }
+
+/*
+* Regarding slicing, the main culprit is COPY-INITIALIZED.
+* TLDR: A Base Class variable simply cannot hold a Derived Class. The derived class instance has to be a pointer / reference for Base Class var to hold.
+E.g. both examples below trigger copy-initalized because we are passing argument by value, not pointer or reference.
+>>> 
+Animal a = shiba;  // slices
+
+void speak(Animal a) {};
+speak(shiba);  // slices too
+
+Animal a = Dog(husky)  // slices too because Animal's copy ctor is invoked.
+<<<
+Animal type (base) cannot contain a larger Dog type (derived).
+
+* The solution is: always refer the derived instance as pointer or reference
+>>>
+Dog     d;          // a real, full Dog, on the stack
+Animal& ref = d;     // just an alias for d — no new object, no copy, no slicing
+Animal* ptr = &d;    // just an address of d — same, no slicing
+ref.makeSound();     // Woof! — dynamic dispatch still works
+<<<
+
+*/
