@@ -6,7 +6,7 @@
 /*   By: kong <kong@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 16:05:26 by kong              #+#    #+#             */
-/*   Updated: 2026/09/01 14:53:01 by kong             ###   ########.fr       */
+/*   Updated: 2026/09/01 14:58:32 by kong             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main()
 	j->makeSound();
 	meta->makeSound();
 	delete meta;
-	delete j;
+	delete j;  // should not create a leak
 	delete i;
 
 	std::cout << "\n===== 1. direct construction, no polymorphism =====" << std::endl;
